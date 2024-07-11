@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Add News{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Add News</h1>
+    <form method="post" action="/admin/add_news">
+        <label for="news_id">News ID:</label>
+        <input type="text" id="news_id" name="news_id" required><br><br>
+
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="autos">Autos</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="finance">Finance</option>
+            <option value="foodanddrink">Food & Drink</option>
+            <option value="health">Health</option>
+            <option value="kids">Kids</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="middleeast">Middle East</option>
+            <option value="movies">Movies</option>
+            <option value="music">Music</option>
+            <option value="news">News</option>
+            <option value="northamerica">North America</option>
+            <option value="sports">Sports</option>
+            <option value="travel">Travel</option>
+            <option value="tv">TV</option>
+            <option value="video">Video</option>
+            <option value="weather">Weather</option>
+        </select><br><br>
+
+        <label for="subcategory">Subcategory:</label>
+        <input type="text" id="subcategory" name="subcategory"><br><br>
+
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" required><br><br>
+
+        <label for="tags">Tags:</label>
+        <input type="text" id="tags" name="tags"><br><br>
+
+        <button type="submit">Add News</button>
+    </form>
+</div>
+{% endblock %}

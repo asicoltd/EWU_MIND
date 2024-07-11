@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}User Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Recommendations List</h1>
+    <ul>
+        {% for recommendation in recommend %}
+        <li>User ID: {{ recommendation.user_id }}</li>
+        <ul>
+            {% for news_item in recommendation.recommended_news %}
+            <li>{{ news_item.title }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}News List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>News List</h1>
+
+    <!-- Search Bar -->
+    <div class="mb-4">
+        <input type="text" id="news-search" class="form-control" placeholder="Search news...">
+    </div>
+
+    <div class="container mt-5">
+        <div class="row" id="news-list">
+            {% for news_item in newsStat %}
+                {% for news_data in news_item.data %}
+                <div class="col-md-4 mb-4 news-item" data-title="{{ news_data.title }}" data-category="{{ news_data.category }}" data-abstract="{{ news_data.abstract }}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ news_data.title }}</h5>
+                            <p class="card-text abstract" style="display: none;">{{ news_data.abstract }}</p>
+                            <p class="card-text"><strong>Category:</strong> {{ news_data.category }} - {{ news_data.subcategory }}</p>
+                            <p class="card-title"><b>Views:</b> {{ news_item.tc }}</p>
+                            <button class="btn btn-primary read-more-btn">Read More</button>
+                            
+                            <!-- Like and Dislike Buttons -->
+                            <div class="mt-3">
+                                <button class="btn btn-success like-btn" data-news-id="{{ news_item.news_id }}">Like <span class="badge badge-light">{{ news_item.like }}</span></button>
+                                <button class="btn btn-danger dislike-btn" data-news-id="{{ news_item.news_id }}">Dislike <span class="badge badge-light">{{ news_item.dislike }}</span></button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".read-more-btn").click(function() {
+            var cardBody = $(this).closest('.card-body');
+            var abstract = cardBody.find('.abstract');
+            
+            // Toggle visibility of abstract
+            abstract.slideToggle();
+            
+            // Change button text based on visibility
+            var buttonText = abstract.is(':visible') ? 'Read Less' : 'Read More';
+            $(this).text(buttonText);
+        });
+
+        // Like Button Action
+        $(".like-btn").click(function() {
+            var newsId = $(this).data('news-id');
+            var userId = prompt("User ID:");
+            $.ajax({
+                type: "POST",
+                url: "/like_news",
+                data: JSON.stringify({user_id:userId, news_id: newsId }),  // Ensure news_id is correctly set here
+                
+                contentType: "application/json",
+                success: function(response) {
+                    alert(response.message);  // Handle success message
+                    // Update like count on the button or refresh page as needed
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Error liking news.");
+                }
+            });
+        });
+        
+        // Dislike Button Action
+        $(".dislike-btn").click(function() {
+            var newsId = $(this).data('news-id');
+            $.ajax({
+                type: "POST",
+                url: "/dislike_news",
+                data: JSON.stringify({ news_id: newsId }),  // Ensure news_id is correctly set here
+                contentType: "application/json",
+                success: function(response) {
+                    alert(response.message);  // Handle success message
+                    // Update dislike count on the button or refresh page as needed
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Error disliking news.");
+                }
+            });
+        });
+
+        // Search Functionality
+        $('#news-search').on('input', function() {
+            var searchTerm = $(this).val().toLowerCase();
+            $('.news-item').each(function() {
+                var title = $(this).data('title').toLowerCase();
+                var category = $(this).data('category').toLowerCase();
+                var abstract = $(this).data('abstract').toLowerCase();
+
+                if (title.includes(searchTerm) || category.includes(searchTerm) || abstract.includes(searchTerm)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

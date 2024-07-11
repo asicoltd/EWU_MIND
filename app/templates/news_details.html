@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news_item.title }}</title>
+    <!-- Add your CSS styles here -->
+    <style>
+        .news-content {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ news_item.title }}</h1>
+    </header>
+    <main>
+        <section class="news-content">
+            <h2>{{ news_item.category }}</h2>
+            <p>{{ news_item.abstract }}</p>
+            <p><a href="{{ news_item.url }}" target="_blank">Read more</a></p>
+        </section>
+    </main>
+</body>
+</html>

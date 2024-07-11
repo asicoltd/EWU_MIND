@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Welcome to Admin Dashboard</h1>
+    
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">All Users</h5>
+                <p class="card-text">View all users in the system.</p>
+                <a href="{{ url_for('all_users') }}" class="btn btn-primary">Go to Users</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">News List</h5>
+                <p class="card-text">Browse the list of news articles.</p>
+                <a href="{{ url_for('news_list') }}" class="btn btn-primary">Go to News List</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Recommendations List</h5>
+                <p class="card-text">View recommendations made to users.</p>
+                <a href="{{ url_for('recommendations') }}" class="btn btn-primary">Go to Recommendations</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add News</h5>
+                <p class="card-text">Add a new article to the news list.</p>
+                <a href="{{ url_for('add_news') }}" class="btn btn-primary">Add News</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}User Signup{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>User Signup</h1>
+        <form method="post" action="{{ url_for('signup') }}">
+            <div class="form-group">
+                <label for="user_id">User ID:</label>
+                <input type="text" id="user_id" name="user_id" class="form-control" required>
+                <label for="pass">Password:</label>
+                <input type="password" id="pass" name="pass" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
+{% endblock %}

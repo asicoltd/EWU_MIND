@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <!-- Link to your CSS file if you have one -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>User Details for User ID: {{ user_id }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Interaction Time</th>
+                <th>Clicked News IDs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for interaction in user_data %}
+            <tr>
+                <td>{{ interaction.interaction_time }}</td>
+                <td>{{ interaction.clicked_news_ids }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

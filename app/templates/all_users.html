@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Add News{% endblock %}
+
+{% block content %}
+    
+    
+    <div class="container mt-5">
+        <h1>All Users</h1>
+        <h1>User Interactions</h1>
+        <div class="row">
+            {% for user_id, interactions in users.items() %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User ID: {{ user_id }}</h5>
+                        <p class="card-text">Total nteractions: {{ interactions | length }}</p>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
